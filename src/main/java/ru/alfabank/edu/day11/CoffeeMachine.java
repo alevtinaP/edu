@@ -18,7 +18,7 @@ public class CoffeeMachine {
     //метод вывод в консоль названия кофе
     public void printCoffeeName(String nameCoffee) {
         if (nameCoffee == null) {
-            throw new NullPointerException("Выберете кофе!!!");
+            throw new NullPointerException("Ошибка: название кофе отсутствует");
         }
         System.out.println(nameCoffee.toUpperCase());
     }
