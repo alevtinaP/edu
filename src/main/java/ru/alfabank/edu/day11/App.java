@@ -4,7 +4,7 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class App {
-    public void main() {
+    public void main(String[] args) {
 
         CoffeeMachine coffeeMachine = new CoffeeMachine();
         Scanner scanner = new Scanner(System.in);
