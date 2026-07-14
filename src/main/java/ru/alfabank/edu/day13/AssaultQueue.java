@@ -25,7 +25,7 @@ public class AssaultQueue {
     }
 
     //вывод текущего состояния очереди
-    public void ptintQueue() {
+    public void printQueue() {
         System.out.println(queue.toString());
     }
 

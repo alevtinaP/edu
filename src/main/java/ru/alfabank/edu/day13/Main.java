@@ -65,7 +65,7 @@ public class Main {
         assaultQueue.addRecruit("Сярожка");
 
         //Выводим текущее состояние очереди
-        assaultQueue.ptintQueue();
+        assaultQueue.printQueue();
         System.out.println();
 
         //4.3 Имитируем уход двух человек из начала очереди с выводом их имён
@@ -74,7 +74,7 @@ public class Main {
         System.out.println();
 
         //Выводим текущее состояние очереди
-        assaultQueue.ptintQueue();
+        assaultQueue.printQueue();
         System.out.println();
 
         //4.4 Имитируем добавление трех новых человек в конец очереди
@@ -83,7 +83,7 @@ public class Main {
         assaultQueue.addRecruit("Витя3");
 
         //Выводим итоговое состояние очереди
-        assaultQueue.ptintQueue();
+        assaultQueue.printQueue();
         System.out.println("=============== ЗАДАНИЕ 5 ===============\n");
 
         //5.1  Создаем первый объект отчёта и выведите его на экран.
