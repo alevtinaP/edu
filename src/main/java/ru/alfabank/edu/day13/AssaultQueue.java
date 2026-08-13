@@ -25,12 +25,12 @@ public class AssaultQueue {
     }
 
     //вывод текущего состояния очереди
-        System.out.println(queue.toString());
+     //   System.out.println(queue.toString());
     }
 
     //Переопределяем toString() для вывода информации об очереди
-    @Override
-    public String toString() {
-        return "Очередь на вход: " + queue;
-    }
-}
+    //@Override
+    //public String toString() {
+     //   return "Очередь на вход: " + queue;
+    //}
+//}

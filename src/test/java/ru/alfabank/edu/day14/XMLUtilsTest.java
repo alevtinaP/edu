@@ -1,8 +1,7 @@
-package ru.alfabank.edu;
+package ru.alfabank.edu.day14;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import ru.alfabank.edu.day14.XMLUtils;
 
 public class XMLUtilsTest {
 

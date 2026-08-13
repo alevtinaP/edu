@@ -25,7 +25,7 @@ public class GameCatalogTest {
     void testAddGameThrowsExceptionOnNull() {
         assertThrows(IllegalArgumentException.class, () -> {
             rental.addGame(null);
-        });
+        }, "Метод addGame должен выбрасывать IllegalArgumentException при попытке добавить null");
     }
 
     @Test
@@ -35,18 +35,19 @@ public class GameCatalogTest {
 
         assertThrows(IllegalArgumentException.class, () -> {
             rental.addGame(new BoardGame("Игра", 12, 150));
-        });
+        }, "Метод addGame должен выбрасывать IllegalArgumentException при добавлении игры с уже существующим названием");
     }
 
     @Test
     void testSearchGameReturnsNullIfNotFound() {
-        assertNull(rental.searchGame("Несуществующя игра"));
+        assertNull(rental.searchGame("Несуществующя игра"),
+                "Метод searchGame должен возвращать null, если игра с таким названием отсутствует в каталоге");
     }
 
     @Test
     void testRentGameThrowsExceptionIfNotFound() {
         assertThrows(IllegalArgumentException.class, () -> {
             rental.rentGame("Несуществующая игра", 10);
-        });
+        }, "Метод rentGame должен выбрасывать IllegalArgumentException, если запрашиваемой игры нет в каталоге");
     }
 }
