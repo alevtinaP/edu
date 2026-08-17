@@ -13,6 +13,9 @@ dependencies {
     testImplementation platform('org.junit:junit-bom:6.0.0')
     testImplementation 'org.junit.jupiter:junit-jupiter'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+    testImplementation("io.cucumber:cucumber-java:7.33.0")
+    testImplementation("io.cucumber:cucumber-junit:7.33.0")
 }
 
 test {
