@@ -8,31 +8,26 @@ import io.cucumber.java.ru.Когда;
 import io.cucumber.java.ru.Тогда;
 import io.cucumber.datatable.DataTable;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
 public class BookingStepdefs {
 
-    @Дано("в ресторане есть столики")
-    public void tablesInTheRestaurantDT (DataTable dataTable) {
-        // Преобразуем таблицу в список карт (ключ -> значение)
-        List<Map<String, String>> input = dataTable.asMaps (String.class, String.class);
+    private final Map<String, Object> stepContext = new HashMap<>();
 
-        for (Map<String, String> columns : input) {
+    @Дано("в ресторане есть столики")
+    public void tablesInTheRestaurantDT(DataTable dataTable) {
+        List<Map<String, String>> table = dataTable.asMaps(String.class, String.class);
+
+        for (Map<String, String> columns : table) {
             int number = Integer.parseInt(columns.get("номер"));
             int capacity = Integer.parseInt(columns.get("вместимость"));
 
-            // Здесь ваша логика (например, сохранение в базу данных или список)
             System.out.printf("Cтолик №%d на %d чел%n", number, capacity);
-
         }
     }
-
-    @Дано("Свободный столик на <Вместимость_столика> человек\\(|а)")
-    public void tablesInTheRestaurant(int number, int capacity) {
-        System.out.printf(String.format("Столик %d с вместимостью %d  чел%n", number, capacity));
-    }
-
 
     @Когда("Надо забронировать столик на {int} чел")
     public void needToReserveTable(int numberOfPeople) {
@@ -80,20 +75,22 @@ public class BookingStepdefs {
         String massage = text.getContent();
         System.out.println(String.format("Гость оставил пожелание к бронированию: %n%s", massage));
     }
+// Структура сценария
 
-
-
-
-
-    @Когда("Необходима бронь на <Количество_человек> человек\\(|а)")
-    public void необходимаБроньНаКоличество_человекЧеловекА() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
+    @Дано("Свободный столик на {string} мест")
+    public void setOutlineTableCapacity(String capacity) {
+        stepContext.put("Вместимость_столика", Integer.parseInt(capacity));
+        System.out.printf("Есть свободный столик на: %s мест%n", capacity);
     }
 
-    @Тогда("Результат брони <бронь>")
-    public void результатБрониБронь() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new PendingException();
+    @Когда("Необходима бронь на {string} человек")
+    public void setOutlineGuestsCount(String guests) {
+        stepContext.put("Количество_человек", Integer.parseInt(guests));
+        System.out.printf("Необходима бронь на количество человек: %s%n", guests);
+    }
+
+    @Тогда("Результат брони должен быть {string}")
+    public void verifyOutlineBookingResult(String expectedResult) {
+        System.out.printf("Столик может быть забронирован?: %s%n", expectedResult);
     }
 }
