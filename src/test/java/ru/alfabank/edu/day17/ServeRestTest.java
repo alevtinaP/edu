@@ -25,6 +25,7 @@ public class ServeRestTest {
         given()
                 .when()
                 .get("/usuarios")
+
                 .then()
                 .statusCode(200)
                 .contentType(ContentType.JSON)
@@ -40,6 +41,7 @@ public class ServeRestTest {
                 given()
                         .when()
                         .get("/usuarios")
+
                         .then()
                         .extract()
                         .path("usuarios[0].email");
@@ -48,8 +50,10 @@ public class ServeRestTest {
 
         given()
                 .queryParam("email", email)
+
                 .when()
                 .get("/usuarios")
+
                 .then()
                 .statusCode(200)
                 .body("quantidade", equalTo(1))
@@ -77,8 +81,10 @@ public class ServeRestTest {
                                   "administrador": "true"
                                 }
                                 """.formatted(userEmail))
+
                         .when()
                         .post("/usuarios")
+
                         .then()
                         .statusCode(201)
                         .body("message", equalTo("Cadastro realizado com sucesso"))
@@ -88,7 +94,7 @@ public class ServeRestTest {
 
         userId = response.path("_id");
 
-        System.out.println("Создался пользователь с id = " + userId);
+        System.out.println("Создался пользователь с id  " + userId);
 
     }
 
@@ -97,7 +103,7 @@ public class ServeRestTest {
     @Order(4)
     void shouldUpdateUser() {
 
-        System.out.println("Обновляем пользоваеля с id" + userId);
+        System.out.println("Обновляем пользоваеля с id " + userId);
 
         given()
                 .pathParam("id", userId)
@@ -112,6 +118,7 @@ public class ServeRestTest {
                         """.formatted(userEmail))
                 .when()
                 .put("/usuarios/{id}")
+
                 .then()
                 .statusCode(200)
                 .body("message", equalTo("Registro alterado com sucesso"));
@@ -127,14 +134,15 @@ public class ServeRestTest {
                 given()
                         .contentType(ContentType.JSON)
                         .body("""
-                        {
-                          "email": "%s",
-                          "password": "secret123"
-                        }
-                        """.formatted(userEmail))
+                                {
+                                  "email": "%s",
+                                  "password": "secret123"
+                                }
+                                """.formatted(userEmail))
 
                         .when()
                         .post("/login")
+
                         .then()
                         .statusCode(200)
                         .body("message", equalTo("Login realizado com sucesso"))
@@ -144,8 +152,51 @@ public class ServeRestTest {
 
         System.out.println("Покупатель залогинился. Токен" + token);
 
-
     }
 
+    @Test
+    @Order(6)
+    void shouldDeleteUser() {
+        given()
+                .contentType(ContentType.JSON)
+                .header("Authorization", token)
+                .pathParam("id", userId)
 
+                .when()
+                .delete("/usuarios/{id}")
+
+                .then()
+                .statusCode(200)
+                .body("message", equalTo("Registro excluído com sucesso"));
+
+        System.out.println("Пользователь удален");
+
+        given()
+                .pathParam("id", userId)
+
+                .when()
+                .get("/usuarios/{id}")
+
+                .then()
+                .statusCode(400)
+                .body("message", equalTo("Usuário não encontrado"));
+
+        System.out.println("Пользователь не найден");
+    }
+
+    @Test
+    @Order(7)
+    void shouldGetAllProducts() {
+        given()
+                .when()
+                .get("/produtos")
+
+                .then()
+                .statusCode(200)
+                .body("quantidade", greaterThan(0))
+                .body("produtos.preco", everyItem(greaterThan(0)))
+                .body("produtos.nome", everyItem(notNullValue()))
+                .body("produtos.nome", hasItem("Logitech MX Vertical 1787737100273"));
+
+    }
 }
