@@ -196,7 +196,7 @@ public class ServeRestTest {
                 .body("quantidade", greaterThan(0))
                 .body("produtos.preco", everyItem(greaterThan(0)))
                 .body("produtos.nome", everyItem(notNullValue()))
-                .body("produtos.nome", hasItem("Logitech MX Vertical 1787737100273"));
+                .body("produtos.nome", hasItem("Logitech MX Vertical"));
 
     }
 }
