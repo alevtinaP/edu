@@ -1,4 +1,4 @@
-package ru.alfabank.edu.day19;
+package ru.alfabank.edu.day19.act1;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Selenide;
